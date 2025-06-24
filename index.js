@@ -30,7 +30,7 @@ app.post('/register', async (req, res) => {
 
 app.get("/customer/:phone", async (req, res) => {
   try {
-    const customer = await mongoose.findOne({ phone: req.params.phone });
+    const customer = await User.findOne({ phone: req.params.phone }); // ✅ correct
     if (!customer) return res.status(404).send("Not found");
     res.json(customer);
   } catch (err) {
