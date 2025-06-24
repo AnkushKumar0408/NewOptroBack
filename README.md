@@ -3,6 +3,10 @@ in my profile forntend repository is uploaded and site demo link is also there s
 
 then in the same folder with fronend folder create a backe nd folder and clone this repository
 
+run npm i command to install node module package 
+
 then change the frontend link to http://localhost:5173
+
+to run backend give command nodemon index.js
 
 Thank You
