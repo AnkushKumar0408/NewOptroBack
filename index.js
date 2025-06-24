@@ -16,45 +16,45 @@ app.get("/", (req, res) => {
   res.send("This is backend for Optronix");
 });
 
-// app.post("/register", async (req, res) => {
-//   const {
-//     fullName,
-//     email,
-//     phone,
-//     gender,
-//     dob,
-//     address,
-//     password,
-//     confirmPassword,
-//     latitude,
-//     longitude,
-//     deviceInfo,
-//   } = req.body;
-//   let user = await mongoose.create({
-//     fullName,
-//     email,
-//     phone,
-//     gender,
-//     dob,
-//     address,
-//     password,
-//     confirmPassword,
-//     latitude,
-//     longitude,
-//     deviceInfo,
-//   });
-// });
-
 app.post("/register", async (req, res) => {
-  try {
-    const customer = new mongoose(req.body);
-    await customer.save();
-    res.status(201).send("Registered");
-  } catch (err) {
-    console.error(err);
-    res.status(400).send("Error");
-  }
+  const {
+    fullName,
+    email,
+    phone,
+    gender,
+    dob,
+    address,
+    password,
+    confirmPassword,
+    latitude,
+    longitude,
+    deviceInfo,
+  } = req.body;
+  let user = await mongoose.create({
+    fullName,
+    email,
+    phone,
+    gender,
+    dob,
+    address,
+    password,
+    confirmPassword,
+    latitude,
+    longitude,
+    deviceInfo,
+  });
 });
+
+// app.post("/register", async (req, res) => {
+//   try {
+//     const customer = new mongoose(req.body);
+//     await customer.save();
+//     res.status(201).send("Registered");
+//   } catch (err) {
+//     console.error(err);
+//     res.status(400).send("Error");
+//   }
+// });
 
 app.get("/customer/:phone", async (req, res) => {
   try {
