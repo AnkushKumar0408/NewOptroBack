@@ -1,5 +1,5 @@
 const express = require("express");
-// const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 const cors = require("cors");
 const mongoose = require("./model/user");
 require("dotenv").config();
@@ -31,6 +31,10 @@ app.post("/register", async (req, res) => {
     longitude,
     deviceInfo,
   } = req.body;
+
+  const saltRounds = 10;
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+
   let user = await mongoose.create({
     fullName,
     email,
@@ -38,8 +42,8 @@ app.post("/register", async (req, res) => {
     gender,
     dob,
     address,
-    password,
-    confirmPassword,
+    password: hashedPassword,
+    confirmPassword: hashedPassword,
     latitude,
     longitude,
     deviceInfo,
