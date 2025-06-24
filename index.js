@@ -1,5 +1,5 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const cors = require("cors");
 const mongoose = require("./model/user");
 require("dotenv").config();
@@ -17,34 +17,34 @@ app.get("/", (req, res) => {
   res.send("This is backend for Optronix");
 });
 
-// app.post("/register", async (req, res) => {
-//   const {
-//     fullName,
-//     email,
-//     phone,
-//     gender,
-//     dob,
-//     address,
-//     password,
-//     confirmPassword,
-//     latitude,
-//     longitude,
-//     deviceInfo,
-//   } = req.body;
-//   let user = await mongoose.create({
-//     fullName,
-//     email,
-//     phone,
-//     gender,
-//     dob,
-//     address,
-//     password,
-//     confirmPassword,
-//     latitude,
-//     longitude,
-//     deviceInfo,
-//   });
-// });
+app.post("/register", async (req, res) => {
+  const {
+    fullName,
+    email,
+    phone,
+    gender,
+    dob,
+    address,
+    password,
+    confirmPassword,
+    latitude,
+    longitude,
+    deviceInfo,
+  } = req.body;
+  let user = await mongoose.create({
+    fullName,
+    email,
+    phone,
+    gender,
+    dob,
+    address,
+    password,
+    confirmPassword,
+    latitude,
+    longitude,
+    deviceInfo,
+  });
+});
 
 // app.post("/register", async (req, res) => {
 //   try {
@@ -57,51 +57,51 @@ app.get("/", (req, res) => {
 //   }
 // });
 
-app.post("/register", async (req, res) => {
-  try {
-    const {
-      fullName,
-      email,
-      phone,
-      gender,
-      dob,
-      address,
-      password,
-      confirmPassword,
-      latitude,
-      longitude,
-      deviceInfo,
-    } = req.body;
+// app.post("/register", async (req, res) => {
+//   try {
+//     const {
+//       fullName,
+//       email,
+//       phone,
+//       gender,
+//       dob,
+//       address,
+//       password,
+//       confirmPassword,
+//       latitude,
+//       longitude,
+//       deviceInfo,
+//     } = req.body;
 
-    // Check if password and confirmPassword match
-    if (password !== confirmPassword) {
-      return res.status(400).send("Passwords do not match");
-    }
+//     // Check if password and confirmPassword match
+//     if (password !== confirmPassword) {
+//       return res.status(400).send("Passwords do not match");
+//     }
 
-    // Hash the password
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+//     // Hash the password
+//     const saltRounds = 10;
+//     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    const user = await mongoose.create({
-      fullName,
-      email,
-      phone,
-      gender,
-      dob,
-      address,
-      password: hashedPassword, // Store hashed password
-      confirmPassword: hashedPassword, // Optional: or remove this field altogether
-      latitude,
-      longitude,
-      deviceInfo,
-    });
+//     const user = await mongoose.create({
+//       fullName,
+//       email,
+//       phone,
+//       gender,
+//       dob,
+//       address,
+//       password: hashedPassword, // Store hashed password
+//       confirmPassword: hashedPassword, // Optional: or remove this field altogether
+//       latitude,
+//       longitude,
+//       deviceInfo,
+//     });
 
-    res.status(201).send("Registered");
-  } catch (err) {
-    console.error(err);
-    res.status(400).send("Error");
-  }
-});
+//     res.status(201).send("Registered");
+//   } catch (err) {
+//     console.error(err);
+//     res.status(400).send("Error");
+//   }
+// });
 
 app.get("/customer/:phone", async (req, res) => {
   try {
